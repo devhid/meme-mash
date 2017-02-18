@@ -6,17 +6,14 @@ import (
 	"io/ioutil"
 	"log"
 	"net/http"
+
+	"github.com/gopherjs/gopherjs/js"
 )
 
+var link = "https://www.reddit.com/r/doge.json"
+
 func handler(w http.ResponseWriter, r *http.Request) {
-	//fmt.Println("handle is called")
-	url := "https://www.reddit.com/r/doge.json"
-	//resp, _ := http.Get(url)
-	//bytes, _ := ioutil.ReadAll(resp.Body)
-
-	//fmt.Fprint(w, string(bytes))
-
-	//resp.Body.Close()
+	var url = link
 
 	client := &http.Client{}
 	req, err := http.NewRequest("GET", url, nil)
@@ -27,8 +24,7 @@ func handler(w http.ResponseWriter, r *http.Request) {
 	resp, err := client.Do(req)
 
 	bytes, _ := ioutil.ReadAll(resp.Body)
-	//fmt.Fprint(w, string(bytes))
-	//fmt.Println(string(bytes))
+
 	parse(bytes, w)
 	resp.Body.Close()
 
@@ -40,6 +36,20 @@ func handler(w http.ResponseWriter, r *http.Request) {
 	err = tpl.Execute(w, getImageArray())
 }
 
+func postHandler(w http.ResponseWriter, r *http.Request) {
+	err := r.ParseForm()
+
+	if err != nil {
+		return
+	}
+
+	name := r.PostFormValue("redditname")
+
+	//fmt.Println("handle is called")
+	link = "https://www.reddit.com/r/" + name + ".json"
+	handler(w, r)
+}
+
 func main() {
 	fmt.Println("Initializing...")
 
@@ -48,4 +58,10 @@ func main() {
 	http.HandleFunc("/", handler)
 	http.ListenAndServe(":8080", nil)
 
+}
+
+func handleInputKeyUp(event *js.Object) {
+	if keycode := event.Get("keycode").Int(); keycode == 13 {
+		http.HandleFunc("/", postHandler)
+	}
 }

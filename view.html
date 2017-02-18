@@ -27,7 +27,7 @@
                 <space class="large"></space>
                 <div class="row center">
                     <form action="/" method="POST">
-                        <input type="text" id="subreddit" placeholder="Please enter a subreddit">
+                        <input type="text" name="redditname" id="redditid" placeholder="Please enter a subreddit">
                     </form>
                 </div>
             </div>
@@ -39,11 +39,12 @@
             <div class="col-3">
                 <a href="{{ . }}">
                     <div class="card">
-                        <div class="img-overlay" style="background: url('{{ . }});"></div>
+                        <div class="img-overlay" style="background: url('{{ . }}');"></div>
                     </div>
                 </a>
             </div>
             {{ end }}
         </div>
+
     </body>
 </html>

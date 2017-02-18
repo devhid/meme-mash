@@ -18,7 +18,7 @@ input[type="text"] {
     padding-bottom: 1rem;
 }
 
-#subreddit {
+#redditid {
     border: 0;
     max-width: 400px;
     color: #222;
@@ -28,7 +28,7 @@ input[type="text"] {
     text-align: center;
 }
 
-#subreddit:focus {
+#redditid:focus {
     box-shadow: none;
     border-bottom: 2px solid #222;
 }
