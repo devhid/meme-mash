@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"html/template"
 	"io/ioutil"
 	"log"
 	"net/http"
@@ -30,6 +31,15 @@ func handler(w http.ResponseWriter, r *http.Request) {
 	//fmt.Println(string(bytes))
 	parse(bytes, w)
 	resp.Body.Close()
+
+	http.Handle("/css/", http.StripPrefix("/css/", http.FileServer(http.Dir("css"))))
+
+	tpl, err := template.ParseFiles("view.html")
+	if err != nil {
+		log.Fatalln(err)
+	}
+
+	err = tpl.Execute(w, getImageArray())
 }
 
 func main() {

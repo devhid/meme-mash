@@ -5,9 +5,17 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"regexp"
 	"strconv"
 	"strings"
 )
+
+var arr []string
+var verifiedLinks []string
+
+func getImageArray() []string {
+	return verifiedLinks
+}
 
 func parse(jsonInput []byte, w http.ResponseWriter) {
 	// fmt.Print("Parsing...")
@@ -20,7 +28,7 @@ func parse(jsonInput []byte, w http.ResponseWriter) {
 	// 	fmt.Fprint(w, "whoops:", err)
 	// }
 
-    urls := ""
+	urls := ""
 
 	fmt.Print("Parsing...")
 
@@ -34,31 +42,34 @@ func parse(jsonInput []byte, w http.ResponseWriter) {
 	for i := 0; i < len(a); i++ {
 		sval, err := q.String("data", "children", strconv.Itoa(i), "data", "url")
 		tErr(err)
-		// fmt.Print(sval)
-		// fmt.Print("|")
+		//fmt.Print(sval)
+		//fmt.Print("|")
 
-        urls += sval + "|"
+		urls += sval + "|"
 	}
 
-    verifyLinks(sval)
+	verifyLinks(urls)
 
 }
 
 func verifyLinks(links string) {
-    arr := strings.split(links, "|")
+	arr = strings.Split(links, "|")
 
-    for i := 0; i < len(arr); i++ {
-        match, _ := regexp.Compile("(?i)^.*\.(jpg|png|gif)$", arr[i])
-        whitelistlinks := strings.Contains(arr[i], "reddituploads") || strings.Contains(arr[i], "imgur")
+	for i := 0; i < len(arr); i++ {
+		match, _ := regexp.MatchString("/\\.(jpe?g|png|gif|bmp)$/i", arr[i])
+		whitelistlinks := strings.Contains(arr[i], "reddituploads") || strings.Contains(arr[i], "imgur")
 
-        if (!match || !whitelistlinks) {
-            arr[i] = nil
-        } else {
-            fmt.Print(arr[i])
-		    fmt.Print("|")
-        }
+		if strings.Contains(arr[i], "imgur") && !match {
+			arr[i] = arr[i] + ".png"
+		}
 
-    }
+		if match || whitelistlinks {
+			fmt.Print(arr[i])
+			fmt.Print("|")
+			verifiedLinks = append(verifiedLinks, strings.Replace(arr[i], "&amp;", "&", -1))
+		}
+
+	}
 }
 
 func tErr(err error) {
