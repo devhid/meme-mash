@@ -8,7 +8,8 @@ import (
 )
 
 func handler(w http.ResponseWriter, r *http.Request) {
-	url := "https://www.reddit.com/r/doge/"
+	//fmt.Println("handle is called")
+	url := "https://www.reddit.com/r/doge.json"
 	//resp, _ := http.Get(url)
 	//bytes, _ := ioutil.ReadAll(resp.Body)
 
@@ -27,7 +28,7 @@ func handler(w http.ResponseWriter, r *http.Request) {
 	bytes, _ := ioutil.ReadAll(resp.Body)
 	//fmt.Fprint(w, string(bytes))
 	//fmt.Println(string(bytes))
-	parse(bytes)
+	parse(bytes, w)
 	resp.Body.Close()
 }
 
@@ -36,5 +37,4 @@ func main() {
 
 	http.HandleFunc("/", handler)
 	http.ListenAndServe(":8080", nil)
-
 }

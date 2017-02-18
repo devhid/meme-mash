@@ -1,0 +1,70 @@
+body {
+    background-color: rgb(255, 204, 51);
+    background-image: linear-gradient(to left, rgb(255, 179, 71), rgb(255, 204, 51));
+    font-family: "Quicksand";
+}
+
+h1 {
+    font-family: "Quicksand";
+    letter-spacing: 3px;
+    color: #222;
+}
+
+input[type="text"] {
+    font-family: "Quicksand";
+}
+
+.collection {
+    padding-bottom: 1rem;
+}
+
+#subreddit {
+    border: 0;
+    max-width: 400px;
+    color: #222;
+    background: transparent;
+    box-shadow: none;
+    border-bottom: 2px solid #c1891b;
+    text-align: center;
+}
+
+#subreddit:focus {
+    box-shadow: none;
+    border-bottom: 2px solid #222;
+}
+
+.card {
+    height: 200px;
+}
+
+.card img {
+    background-position: center center;
+    max-width: 100%;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+}
+
+.row {
+    margin: 0;
+}
+
+.row .col-fluid {
+    margin-top: 0 !important;
+}
+
+/* Modify placeholder text */
+::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+  color: #c1891b;
+}
+::-moz-placeholder { /* Firefox 19+ */
+  color: #c1891b;
+}
+:-ms-input-placeholder { /* IE 10+ */
+  color: #c1891b;
+}
+:-moz-placeholder { /* Firefox 18- */
+  color: #c1891b;
+}
