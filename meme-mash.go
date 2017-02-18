@@ -10,7 +10,7 @@ import (
 
 func handler(w http.ResponseWriter, r *http.Request) {
 	//fmt.Println("handle is called")
-	url := "https://www.reddit.com/r/doge.json"
+	url := "https://www.reddit.com/r/indianpeoplefacebook.json"
 	//resp, _ := http.Get(url)
 	//bytes, _ := ioutil.ReadAll(resp.Body)
 
