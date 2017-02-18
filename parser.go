@@ -20,6 +20,8 @@ func parse(jsonInput []byte, w http.ResponseWriter) {
 	// 	fmt.Fprint(w, "whoops:", err)
 	// }
 
+    urls := ""
+
 	fmt.Print("Parsing...")
 
 	data := map[string]interface{}{}
@@ -30,12 +32,33 @@ func parse(jsonInput []byte, w http.ResponseWriter) {
 	a, err := q.ArrayOfObjects("data", "children")
 
 	for i := 0; i < len(a); i++ {
-		ival, err := q.String("data", "children", strconv.Itoa(i), "data", "url")
+		sval, err := q.String("data", "children", strconv.Itoa(i), "data", "url")
 		tErr(err)
-		fmt.Print(ival)
-		fmt.Print("|")
+		// fmt.Print(sval)
+		// fmt.Print("|")
+
+        urls += sval + "|"
 	}
 
+    verifyLinks(sval)
+
+}
+
+func verifyLinks(links string) {
+    arr := strings.split(links, "|")
+
+    for i := 0; i < len(arr); i++ {
+        match, _ := regexp.Compile("(?i)^.*\.(jpg|png|gif)$", arr[i])
+        whitelistlinks := strings.Contains(arr[i], "reddituploads") || strings.Contains(arr[i], "imgur")
+
+        if (!match || !whitelistlinks) {
+            arr[i] = nil
+        } else {
+            fmt.Print(arr[i])
+		    fmt.Print("|")
+        }
+
+    }
 }
 
 func tErr(err error) {
