@@ -26,7 +26,8 @@ func handler(w http.ResponseWriter, r *http.Request) {
 
 	bytes, _ := ioutil.ReadAll(resp.Body)
 	//fmt.Fprint(w, string(bytes))
-	fmt.Println(string(bytes))
+	//fmt.Println(string(bytes))
+	parse(bytes)
 	resp.Body.Close()
 }
 
