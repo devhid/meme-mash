@@ -31,13 +31,13 @@
             </div>
         </div>
 
-        <div class="row fluid-container">
+        <div class="row">
 
             {{ range . }}
-            <div class="col-fluid">
+            <div class="col-3">
                 <a href="{{ . }}">
                     <div class="card">
-                        <img src="{{ . }}"></img>
+                        <div class="img-overlay" style="background: url('{{ . }});"></div>
                     </div>
                 </a>
             </div>

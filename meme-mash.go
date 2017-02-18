@@ -10,7 +10,7 @@ import (
 
 func handler(w http.ResponseWriter, r *http.Request) {
 	//fmt.Println("handle is called")
-	url := "https://www.reddit.com/r/indianpeoplefacebook.json"
+	url := "https://www.reddit.com/r/doge.json"
 	//resp, _ := http.Get(url)
 	//bytes, _ := ioutil.ReadAll(resp.Body)
 
@@ -32,8 +32,6 @@ func handler(w http.ResponseWriter, r *http.Request) {
 	parse(bytes, w)
 	resp.Body.Close()
 
-	http.Handle("/css/", http.StripPrefix("/css/", http.FileServer(http.Dir("css"))))
-
 	tpl, err := template.ParseFiles("view.html")
 	if err != nil {
 		log.Fatalln(err)
@@ -45,6 +43,9 @@ func handler(w http.ResponseWriter, r *http.Request) {
 func main() {
 	fmt.Println("Initializing...")
 
+	http.Handle("/css/", http.StripPrefix("/css/", http.FileServer(http.Dir("css"))))
+
 	http.HandleFunc("/", handler)
 	http.ListenAndServe(":8080", nil)
+
 }

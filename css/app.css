@@ -55,6 +55,11 @@ input[type="text"] {
     margin-top: 0 !important;
 }
 
+.img-overlay {
+    background-size: cover !important;
+    height: 100%;
+}
+
 /* Modify placeholder text */
 ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
   color: #c1891b;

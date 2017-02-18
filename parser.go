@@ -18,17 +18,11 @@ func getImageArray() []string {
 }
 
 func parse(jsonInput []byte, w http.ResponseWriter) {
-	// fmt.Print("Parsing...")
-	// var data = new(Data)
-	// var children []Children = data.children
-
-	// if err := json.Unmarshal(jsonInput, &children); err == nil {
-	// 	fmt.Fprint(w, children[0].data.url)
-	// } else {
-	// 	fmt.Fprint(w, "whoops:", err)
-	// }
 
 	urls := ""
+
+	arr = nil
+	verifiedLinks = nil
 
 	fmt.Print("Parsing...")
 
