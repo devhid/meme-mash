@@ -6,8 +6,6 @@ import (
 	"io/ioutil"
 	"log"
 	"net/http"
-
-	"github.com/gopherjs/gopherjs/js"
 )
 
 var link = "https://www.reddit.com/r/doge.json"
@@ -29,7 +27,7 @@ func handler(w http.ResponseWriter, r *http.Request) {
 	parse(bytes, w)
 	resp.Body.Close()
 
-	tpl, err := template.ParseFiles("view.html")
+	tpl, err := template.ParseFiles("index.html")
 	if err != nil {
 		log.Fatalln(err)
 	}
@@ -64,10 +62,4 @@ func main() {
 	http.HandleFunc("/post", postHandler)
 	http.ListenAndServe(":8080", nil)
 
-}
-
-func handleInputKeyUp(event *js.Object) {
-	if keycode := event.Get("keycode").Int(); keycode == 13 {
-		http.HandleFunc("/", postHandler)
-	}
 }
