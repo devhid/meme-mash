@@ -79,7 +79,7 @@ p {
 }
 
 .row [class*=" col-"], .row [class^=col-] {
-    margin-left: 0.5rem;
+    margin-left: 1%;
 }
 
 .stats {
@@ -112,7 +112,7 @@ i {
 
 @media (max-width: 768px) {
     .row {
-        margin: 0 2% !important;
+        margin: 0 15px !important;
     }
 
     .row [class*=" col-"]:not(.ignore-screen), .row [class^=col-]:not(.ignore-screen) {
@@ -122,6 +122,10 @@ i {
     .card {
         height: 300px;
         margin: 0 30px;
+    }
+
+    .level {
+        display: flex;
     }
 }
 
