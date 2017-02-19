@@ -50,7 +50,7 @@ func verifyLinks(links string) {
 	arr = strings.Split(links, "|")
 
 	for i := 0; i < len(arr); i++ {
-		match, _ := regexp.MatchString("/\\.(jpe?g|png|bmp)$/i", arr[i])
+		match, _ := regexp.MatchString("/\\.(jpe?g|png|bmp|gif)$/i", arr[i])
 		whitelistlinks := strings.Contains(arr[i], "reddituploads") || (strings.Contains(arr[i], "imgur") && match)
 
 		if strings.Contains(arr[i], "imgur") && !match {
@@ -58,8 +58,8 @@ func verifyLinks(links string) {
 		}
 
 		if match || whitelistlinks {
-			fmt.Print(arr[i])
-			fmt.Print("|")
+			//fmt.Print(arr[i])
+			//fmt.Print("|")
 			verifiedLinks = append(verifiedLinks, strings.Replace(arr[i], "&amp;", "&", -1))
 		}
 

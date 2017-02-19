@@ -20,7 +20,7 @@ input[type="text"] {
 
 #redditid {
     border: 0;
-    max-width: 400px;
+    width: 250px;
     color: #222;
     background: transparent;
     box-shadow: none;

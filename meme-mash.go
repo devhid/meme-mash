@@ -20,6 +20,7 @@ func handler(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		log.Fatalln(err)
 	}
+
 	req.Header.Add("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/56.0.2924.87 Safari/537.36")
 	resp, err := client.Do(req)
 
@@ -44,6 +45,7 @@ func postHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	name := r.PostFormValue("redditname")
+	fmt.Print(name + "\n")
 
 	//fmt.Println("handle is called")
 	link = "https://www.reddit.com/r/" + name + ".json"
@@ -53,9 +55,13 @@ func postHandler(w http.ResponseWriter, r *http.Request) {
 func main() {
 	fmt.Println("Initializing...")
 
+	//enter := js.Global.Get("document").Call("getElementById", "redditid")
+	//enter.Call("addEventListener", "keyup", handleInputKeyUp, false)
+
 	http.Handle("/css/", http.StripPrefix("/css/", http.FileServer(http.Dir("css"))))
 
 	http.HandleFunc("/", handler)
+	http.HandleFunc("/post", postHandler)
 	http.ListenAndServe(":8080", nil)
 
 }
