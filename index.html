@@ -42,7 +42,7 @@
                     <div class="card">
                         <div class="img-overlay" style="background: url('{{ .Image }}');"></div>
                         <div class="stats center">
-                            <p>Ups: {{ .Upvotes }}</p>
+                            <p><i class="fa fa-check pad-left"></i> {{ .Upvotes }}</p>
                             <p>Comments: {{ .Comments }}</p>
                         </div>
                     </div>
@@ -50,5 +50,7 @@
             </div>
             {{ end }}
         </div>
+
+        <script src="https://use.fontawesome.com/a696b91557.js"></script>
     </body>
 </html>
