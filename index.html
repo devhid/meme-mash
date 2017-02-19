@@ -23,10 +23,11 @@
             <div class="content">
                 <div class="rowf">
                     <h1 class="center">Meme Mash</h1>
+                    <p class="center title">Your favorite memes from your favorite subreddit.</p>
                 </div>
                 <space class="large"></space>
                 <div class="row center">
-                    <form action="/post" method="post">
+                    <form action="/post" method="post" class="center">
                         <input type="text" name="redditname" id="redditid" placeholder="Please enter a subreddit">
                     </form>
                 </div>
@@ -37,21 +38,17 @@
 
             {{ range . }}
             <div class="col-3">
-                <a href="{{ . }}">
+                <a href="{{ .Image }}">
                     <div class="card">
-                        <div class="img-overlay" style="background: url('{{ . }}');"></div>
+                        <div class="img-overlay" style="background: url('{{ .Image }}');"></div>
+                        <div class="stats center">
+                            <p>Ups: {{ .Upvotes }}</p>
+                            <p>Comments: {{ .Comments }}</p>
+                        </div>
                     </div>
                 </a>
             </div>
             {{ end }}
         </div>
-
-        <script>
-            $("#redditid").on("keyup", function(e) {
-                if (e.keyCode == 13) {
-                    $.post("/")
-                }
-            })
-        </script>
     </body>
 </html>

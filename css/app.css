@@ -7,11 +7,26 @@ body {
 h1 {
     font-family: "Quicksand";
     letter-spacing: 3px;
-    color: #222;
 }
 
 input[type="text"] {
     font-family: "Quicksand";
+    transition: all .3s;
+}
+
+#redditid:focus {
+    width: 90%;
+    transition: all .3s;
+}
+
+form {
+    transition: all .3s;
+    width: 100%;
+}
+
+p {
+    font-family: "Quicksand";
+    margin: 0.8rem 0;
 }
 
 .collection {
@@ -20,12 +35,13 @@ input[type="text"] {
 
 #redditid {
     border: 0;
-    width: 250px;
+    width: 50%;
     color: #222;
     background: transparent;
     box-shadow: none;
     border-bottom: 2px solid #c1891b;
     text-align: center;
+    transition: all .3s;
 }
 
 #redditid:focus {
@@ -35,6 +51,7 @@ input[type="text"] {
 
 .card {
     height: 200px;
+    background-color: #222;
 }
 
 .card img {
@@ -48,8 +65,9 @@ input[type="text"] {
 }
 
 .row {
-    margin: 0;
+    margin-left: 15px;
 }
+
 
 .row .col-fluid {
     margin-top: 0 !important;
@@ -58,6 +76,45 @@ input[type="text"] {
 .img-overlay {
     background-size: cover !important;
     height: 100%;
+}
+
+.row [class*=" col-"], .row [class^=col-] {
+    margin-left: 0.5rem;
+}
+
+.stats {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    color: #fff;
+    height: 100%;
+    opacity: 0;
+    transition: all .3s;
+}
+
+.stats:hover {
+    opacity: 1;
+    transition: all .3s;
+    -webkit-transition: all .3s;
+    -moz-transition: all .3s;
+    -ms-transition: all .3s;
+    -o-transition: all .3s;
+    background: rgba(34, 34, 34, 0.6);
+}
+
+@media (max-width: 768px) {
+    .row {
+        margin: 0 15px !important;
+    }
+
+    .row [class*=" col-"]:not(.ignore-screen), .row [class^=col-]:not(.ignore-screen) {
+        margin: 0;
+    }
+
+    .card {
+        height: 300px;
+        margin: 0 30px;
+    }
 }
 
 /* Modify placeholder text */

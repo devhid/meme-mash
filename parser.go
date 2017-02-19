@@ -10,16 +10,22 @@ import (
 	"strings"
 )
 
-var arr []string
-var verifiedLinks []string
+type MemeData struct {
+	Image    string
+	Upvotes  string
+	Comments string
+}
 
-func getImageArray() []string {
+var arr []MemeData
+var verifiedLinks []MemeData
+
+func getMemeArray() []MemeData {
 	return verifiedLinks
 }
 
 func parse(jsonInput []byte, w http.ResponseWriter) {
 
-	urls := ""
+	var urls []MemeData
 
 	arr = nil
 	verifiedLinks = nil
@@ -35,32 +41,39 @@ func parse(jsonInput []byte, w http.ResponseWriter) {
 
 	for i := 0; i < len(a); i++ {
 		sval, err := q.String("data", "children", strconv.Itoa(i), "data", "url")
+		ups, err := q.Int("data", "children", strconv.Itoa(i), "data", "ups")
+		comments, err := q.Int("data", "children", strconv.Itoa(i), "data", "num_comments")
 		tErr(err)
 		//fmt.Print(sval)
 		//fmt.Print("|")
 
-		urls += sval + "|"
+		urls = append(urls, MemeData{sval, strconv.Itoa(ups), strconv.Itoa(comments)})
 	}
 
 	verifyLinks(urls)
 
 }
 
-func verifyLinks(links string) {
-	arr = strings.Split(links, "|")
+func verifyLinks(links []MemeData) {
+	arr = links
 
 	for i := 0; i < len(arr); i++ {
-		match, _ := regexp.MatchString("/\\.(jpe?g|png|bmp|gif)$/i", arr[i])
-		whitelistlinks := strings.Contains(arr[i], "reddituploads") || (strings.Contains(arr[i], "imgur") && match)
+		match, _ := regexp.MatchString("/\\.(jpe?g|png|bmp|gif|gifv)$/i", arr[i].Image)
+		whitelistlinks := strings.Contains(arr[i].Image, "reddituploads") || strings.Contains(arr[i].Image, "redd.it") || (strings.Contains(arr[i].Image, "imgur") && match)
 
-		if strings.Contains(arr[i], "imgur") && !match {
-			arr[i] = arr[i] + ".png"
+		if strings.Contains(arr[i].Image, "imgur") && !match {
+			arr[i].Image = arr[i].Image + ".png"
+		}
+
+		if strings.Contains(arr[i].Image, "&amp;") {
+			arr[i].Image = strings.Replace(arr[i].Image, "&amp;", "&", -1)
+			//fmt.Println(arr[i].Image)
 		}
 
 		if match || whitelistlinks {
 			//fmt.Print(arr[i])
 			//fmt.Print("|")
-			verifiedLinks = append(verifiedLinks, strings.Replace(arr[i], "&amp;", "&", -1))
+			verifiedLinks = append(verifiedLinks, arr[i])
 		}
 
 	}

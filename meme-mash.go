@@ -32,7 +32,7 @@ func handler(w http.ResponseWriter, r *http.Request) {
 		log.Fatalln(err)
 	}
 
-	err = tpl.Execute(w, getImageArray())
+	err = tpl.Execute(w, getMemeArray())
 }
 
 func postHandler(w http.ResponseWriter, r *http.Request) {
@@ -60,6 +60,6 @@ func main() {
 
 	http.HandleFunc("/", handler)
 	http.HandleFunc("/post", postHandler)
-	http.ListenAndServe(":8080", nil)
+	http.ListenAndServe(":80", nil)
 
 }
