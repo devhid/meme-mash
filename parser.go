@@ -40,10 +40,6 @@ func parse(jsonInput []byte, w http.ResponseWriter) {
 		sval, _ := q.String("data", "children", strconv.Itoa(i), "data", "url")
 		ups, _ := q.Int("data", "children", strconv.Itoa(i), "data", "ups")
 		comments, _ := q.Int("data", "children", strconv.Itoa(i), "data", "num_comments")
-		//tErr(err)
-		//fmt.Print(sval)
-		//fmt.Print("|")
-
 		urls = append(urls, MemeData{sval, strconv.Itoa(ups), strconv.Itoa(comments)})
 	}
 
@@ -64,15 +60,11 @@ func verifyLinks(links []MemeData) {
 
 		if strings.Contains(arr[i].Image, "&amp;") {
 			arr[i].Image = strings.Replace(arr[i].Image, "&amp;", "&", -1)
-			//fmt.Println(arr[i].Image)
 		}
 
 		if match || whitelistlinks {
-			//fmt.Print(arr[i])
-			//fmt.Print("|")
 			verifiedLinks = append(verifiedLinks, arr[i])
 		}
-
 	}
 }
 
