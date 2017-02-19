@@ -102,9 +102,17 @@ p {
     background: rgba(34, 34, 34, 0.6);
 }
 
+.stats p {
+    padding: 0 5px;
+}
+
+i {
+    margin-right: 7px;
+}
+
 @media (max-width: 768px) {
     .row {
-        margin: 0 15px !important;
+        margin: 0 2% !important;
     }
 
     .row [class*=" col-"]:not(.ignore-screen), .row [class^=col-]:not(.ignore-screen) {

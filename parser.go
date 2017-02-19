@@ -2,7 +2,6 @@ package main
 
 import (
 	"encoding/json"
-	"fmt"
 	"log"
 	"net/http"
 	"regexp"
@@ -30,8 +29,6 @@ func parse(jsonInput []byte, w http.ResponseWriter) {
 	arr = nil
 	verifiedLinks = nil
 
-	fmt.Print("Parsing...")
-
 	data := map[string]interface{}{}
 	dec := json.NewDecoder(strings.NewReader(string(jsonInput)))
 	err := dec.Decode(&data)
@@ -40,10 +37,10 @@ func parse(jsonInput []byte, w http.ResponseWriter) {
 	a, err := q.ArrayOfObjects("data", "children")
 
 	for i := 0; i < len(a); i++ {
-		sval, err := q.String("data", "children", strconv.Itoa(i), "data", "url")
-		ups, err := q.Int("data", "children", strconv.Itoa(i), "data", "ups")
-		comments, err := q.Int("data", "children", strconv.Itoa(i), "data", "num_comments")
-		tErr(err)
+		sval, _ := q.String("data", "children", strconv.Itoa(i), "data", "url")
+		ups, _ := q.Int("data", "children", strconv.Itoa(i), "data", "ups")
+		comments, _ := q.Int("data", "children", strconv.Itoa(i), "data", "num_comments")
+		//tErr(err)
 		//fmt.Print(sval)
 		//fmt.Print("|")
 

@@ -22,8 +22,8 @@
             <space class="x-large"></space>
             <div class="content">
                 <div class="rowf">
-                    <h1 class="center">Meme Mash</h1>
-                    <p class="center title">Your favorite memes from your favorite subreddit.</p>
+                    <h1 class="center text-center">Meme Mash</h1>
+                    <p class="center text-center title">Your favorite memes from your favorite subreddit.</p>
                 </div>
                 <space class="large"></space>
                 <div class="row center">
@@ -42,8 +42,8 @@
                     <div class="card">
                         <div class="img-overlay" style="background: url('{{ .Image }}');"></div>
                         <div class="stats center">
-                            <p><i class="fa fa-check pad-left"></i> {{ .Upvotes }}</p>
-                            <p>Comments: {{ .Comments }}</p>
+                            <p class="level"><i class="fa fa-check pad-right"></i>  {{ .Upvotes }}</p>
+                            <p class="level"><i class="fa fa-comment pad-right"></i>  {{ .Comments }}</p>
                         </div>
                     </div>
                 </a>
