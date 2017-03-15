@@ -1,4 +1,5 @@
 # MemeMash
+Memes.
 
 ## Todo
 * List popular subreddits
