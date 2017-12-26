@@ -1,6 +1,4 @@
 # MemeMash
-Memes.
-
 ![alt text](https://i.imgur.com/1jmfISs.png)
 
 ## Todo
