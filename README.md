@@ -1,6 +1,8 @@
 # MemeMash
 Memes.
 
+![alt text](https://i.imgur.com/1jmfISs.png)
+
 ## Todo
 * List popular subreddits
 * Fetch more than 25 results from subreddits
